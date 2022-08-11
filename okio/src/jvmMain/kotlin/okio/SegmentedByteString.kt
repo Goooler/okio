@@ -134,6 +134,6 @@ internal actual class SegmentedByteString internal actual constructor(
 
   override fun toString() = toByteString().toString()
 
-  @Suppress("unused", "PLATFORM_CLASS_MAPPED_TO_KOTLIN") // For Java Serialization.
+  // For Java Serialization.
   private fun writeReplace(): Object = toByteString() as Object
 }
