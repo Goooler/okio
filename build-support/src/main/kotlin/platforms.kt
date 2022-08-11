@@ -66,7 +66,7 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.createSourceSet(
   val suffix = when {
     name.endsWith("Main") -> "Main"
     name.endsWith("Test") -> "Test"
-    else -> error("unexpected source set name: ${name}")
+    else -> error("unexpected source set name: $name")
   }
 
   for (childTarget in children) {

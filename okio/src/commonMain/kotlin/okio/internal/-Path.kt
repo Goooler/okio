@@ -37,7 +37,6 @@ private val DOT = ".".encodeUtf8()
 @SharedImmutable
 private val DOT_DOT = "..".encodeUtf8()
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonRoot(): Path? {
   return when (val rootLength = rootLength()) {
     -1 -> null
@@ -45,13 +44,11 @@ internal inline fun Path.commonRoot(): Path? {
   }
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonSegments(): List<String> {
   return commonSegmentsBytes().map { it.utf8() }
 }
 
 /** This function skips the root then splits on slash. */
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonSegmentsBytes(): List<ByteString> {
   val result = mutableListOf<ByteString>()
   var segmentStart = rootLength()
@@ -104,17 +101,14 @@ private fun Path.rootLength(): Int {
   return -1
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonIsAbsolute(): Boolean {
   return rootLength() != -1
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonIsRelative(): Boolean {
   return rootLength() == -1
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonVolumeLetter(): Char? {
   if (bytes.indexOf(SLASH) != -1) return null
   if (bytes.size < 2) return null
@@ -131,7 +125,6 @@ private val Path.indexOfLastSlash: Int
     return bytes.lastIndexOf(BACKSLASH)
   }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonNameBytes(): ByteString {
   val lastSlash = indexOfLastSlash
   return when {
@@ -141,12 +134,10 @@ internal inline fun Path.commonNameBytes(): ByteString {
   }
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonName(): String {
   return nameBytes.utf8()
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonParent(): Path? {
   if (bytes == DOT || bytes == SLASH || bytes == BACKSLASH || lastSegmentIsDotDot()) {
     return null // Terminal path.
@@ -186,22 +177,18 @@ private fun Path.lastSegmentIsDotDot(): Boolean {
   return false
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonIsRoot(): Boolean {
   return rootLength() == bytes.size
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonResolve(child: String, normalize: Boolean): Path {
   return commonResolve(Buffer().writeUtf8(child), normalize = normalize)
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonResolve(child: ByteString, normalize: Boolean): Path {
   return commonResolve(Buffer().write(child), normalize = normalize)
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonResolve(child: Buffer, normalize: Boolean): Path {
   return commonResolve(child.toPath(normalize = false), normalize = normalize)
 }
@@ -220,7 +207,6 @@ internal fun Path.commonResolve(child: Path, normalize: Boolean): Path {
   return buffer.toPath(normalize = normalize)
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonRelativeTo(other: Path): Path {
   require(root == other.root) {
     "Paths of different roots cannot be relative to each other: $this and $other"
@@ -260,7 +246,6 @@ internal inline fun Path.commonRelativeTo(other: Path): Path {
   return buffer.toPath(normalize = false)
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonNormalized(): Path {
   return toString().toPath(normalize = true)
 }
@@ -274,22 +259,18 @@ private val Path.slash: ByteString?
     }
   }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonCompareTo(other: Path): Int {
   return bytes.compareTo(other.bytes)
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonEquals(other: Any?): Boolean {
   return other is Path && other.bytes == bytes
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonHashCode(): Int {
   return bytes.hashCode()
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonToString(): String {
   return bytes.utf8()
 }

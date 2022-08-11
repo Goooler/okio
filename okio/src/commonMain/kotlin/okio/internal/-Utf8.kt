@@ -43,7 +43,7 @@ fun String.commonAsUtf8ToByteArray(): ByteArray {
 
   // Assume ASCII until a UTF-8 code point is observed. This is ugly but yields
   // about a 2x performance increase for pure ASCII.
-  for (index in 0 until length) {
+  for (index in indices) {
     val b0 = this[index]
     if (b0 >= '\u0080') {
       var size = index

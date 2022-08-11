@@ -15,7 +15,6 @@
  */
 
 // TODO move to RealBufferedSink class: https://youtrack.jetbrains.com/issue/KT-20427
-@file:Suppress("NOTHING_TO_INLINE")
 
 package okio.internal
 

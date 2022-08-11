@@ -73,7 +73,6 @@ internal actual fun PosixFileSystem.variantDelete(path: Path, mustExist: Boolean
   }
 }
 
-@OptIn(UnsafeNumber::class)
 internal actual fun PosixFileSystem.variantMkdir(dir: Path): Int {
   return mkdir(dir.toString(), 0b111111111u.convert() /* octal 777 */)
 }

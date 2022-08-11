@@ -18,9 +18,9 @@ package com.squareup.okio.benchmarks;
 
 import java.io.EOFException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -192,7 +192,7 @@ public class BufferPerformanceBenchmark {
       throw new IllegalArgumentException("can not access: " + path);
     }
 
-    try (InputStream in = new FileInputStream(path)) {
+    try (InputStream in = Files.newInputStream(path.toPath())) {
       int available = in.read();
       if (available < 0) {
         throw new IllegalArgumentException("can not read: " + path);

@@ -36,7 +36,6 @@ import kotlin.native.concurrent.SharedImmutable
 // TODO Kotlin's expect classes can't have default implementations, so platform implementations
 // have to call these functions. Remove all this nonsense when expect class allow actual code.
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonUtf8(): String {
   var result = utf8
   if (result == null) {
@@ -47,17 +46,14 @@ internal inline fun ByteString.commonUtf8(): String {
   return result
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonBase64(): String = data.encodeBase64()
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonBase64Url() = data.encodeBase64(map = BASE64_URL_SAFE)
 
 @SharedImmutable
 internal val HEX_DIGIT_CHARS =
   charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonHex(): String {
   val result = CharArray(data.size * 2)
   var c = 0
@@ -68,7 +64,6 @@ internal inline fun ByteString.commonHex(): String {
   return result.concatToString()
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonToAsciiLowercase(): ByteString {
   // Search for an uppercase character. If we don't find one, return this.
   var i = 0
@@ -96,7 +91,6 @@ internal inline fun ByteString.commonToAsciiLowercase(): ByteString {
   return this
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonToAsciiUppercase(): ByteString {
   // Search for an lowercase character. If we don't find one, return this.
   var i = 0
@@ -124,7 +118,6 @@ internal inline fun ByteString.commonToAsciiUppercase(): ByteString {
   return this
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonSubstring(beginIndex: Int, endIndex: Int): ByteString {
   val endIndex = resolveDefaultParameter(endIndex)
   require(beginIndex >= 0) { "beginIndex < 0" }
@@ -139,19 +132,14 @@ internal inline fun ByteString.commonSubstring(beginIndex: Int, endIndex: Int): 
   return ByteString(data.copyOfRange(beginIndex, endIndex))
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonGetByte(pos: Int) = data[pos]
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonGetSize() = data.size
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonToByteArray() = data.copyOf()
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonInternalArray() = data
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonRangeEquals(
   offset: Int,
   other: ByteString,
@@ -159,7 +147,6 @@ internal inline fun ByteString.commonRangeEquals(
   byteCount: Int
 ): Boolean = other.rangeEquals(otherOffset, this.data, offset, byteCount)
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonRangeEquals(
   offset: Int,
   other: ByteArray,
@@ -173,7 +160,6 @@ internal inline fun ByteString.commonRangeEquals(
     )
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonCopyInto(
   offset: Int,
   target: ByteArray,
@@ -183,23 +169,18 @@ internal inline fun ByteString.commonCopyInto(
   data.copyInto(target, targetOffset, offset, offset + byteCount)
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonStartsWith(prefix: ByteString) =
   rangeEquals(0, prefix, 0, prefix.size)
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonStartsWith(prefix: ByteArray) =
   rangeEquals(0, prefix, 0, prefix.size)
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonEndsWith(suffix: ByteString) =
   rangeEquals(size - suffix.size, suffix, 0, suffix.size)
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonEndsWith(suffix: ByteArray) =
   rangeEquals(size - suffix.size, suffix, 0, suffix.size)
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonIndexOf(other: ByteArray, fromIndex: Int): Int {
   val limit = data.size - other.size
   for (i in maxOf(fromIndex, 0)..limit) {
@@ -210,13 +191,11 @@ internal inline fun ByteString.commonIndexOf(other: ByteArray, fromIndex: Int): 
   return -1
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonLastIndexOf(
   other: ByteString,
   fromIndex: Int
 ) = lastIndexOf(other.internalArray(), fromIndex)
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonLastIndexOf(other: ByteArray, fromIndex: Int): Int {
   val fromIndex = resolveDefaultParameter(fromIndex)
   val limit = data.size - other.size
@@ -228,7 +207,6 @@ internal inline fun ByteString.commonLastIndexOf(other: ByteArray, fromIndex: In
   return -1
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonEquals(other: Any?): Boolean {
   return when {
     other === this -> true
@@ -237,7 +215,6 @@ internal inline fun ByteString.commonEquals(other: Any?): Boolean {
   }
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonHashCode(): Int {
   val result = hashCode
   if (result != 0) return result
@@ -246,7 +223,6 @@ internal inline fun ByteString.commonHashCode(): Int {
   }
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonCompareTo(other: ByteString): Int {
   val sizeA = size
   val sizeB = other.size
@@ -265,30 +241,25 @@ internal inline fun ByteString.commonCompareTo(other: ByteString): Int {
   return if (sizeA < sizeB) -1 else 1
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun commonOf(data: ByteArray) = ByteString(data.copyOf())
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteArray.commonToByteString(offset: Int, byteCount: Int): ByteString {
   val byteCount = resolveDefaultParameter(byteCount)
   checkOffsetAndCount(size.toLong(), offset.toLong(), byteCount.toLong())
   return ByteString(copyOfRange(offset, offset + byteCount))
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun String.commonEncodeUtf8(): ByteString {
   val byteString = ByteString(asUtf8ToByteArray())
   byteString.utf8 = this
   return byteString
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun String.commonDecodeBase64(): ByteString? {
   val decoded = decodeBase64ToArray()
   return if (decoded != null) ByteString(decoded) else null
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun String.commonDecodeHex(): ByteString {
   require(length % 2 == 0) { "Unexpected hex string: $this" }
 
@@ -315,7 +286,6 @@ private fun decodeHexDigit(c: Char): Int {
   }
 }
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun ByteString.commonToString(): String {
   if (data.isEmpty()) return "[size=0]"
 

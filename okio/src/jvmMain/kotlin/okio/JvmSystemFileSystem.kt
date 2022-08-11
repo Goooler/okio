@@ -66,14 +66,12 @@ internal open class JvmSystemFileSystem : FileSystem() {
   private fun list(dir: Path, throwOnFailure: Boolean): List<Path>? {
     val file = dir.toFile()
     val entries = file.list()
-    if (entries == null) {
-      if (throwOnFailure) {
+      ?: if (throwOnFailure) {
         if (!file.exists()) throw FileNotFoundException("no such file: $dir")
         throw IOException("failed to list $dir")
       } else {
         return null
       }
-    }
     val result = entries.mapTo(mutableListOf()) { dir / it }
     result.sort()
     return result

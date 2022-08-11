@@ -722,7 +722,7 @@ abstract class AbstractBufferedSourceTest internal constructor(
     }
     assertEquals("bytes is empty", e.message)
 
-    e = assertFailsWith<IllegalArgumentException> {
+    e = assertFailsWith {
       source.indexOf("hi".encodeUtf8(), -1)
     }
     assertEquals("fromIndex < 0: -1", e.message)
