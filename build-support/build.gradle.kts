@@ -1,6 +1,5 @@
 plugins {
   `kotlin-dsl`
-  `java-gradle-plugin`
 }
 
 repositories {
@@ -10,6 +9,7 @@ repositories {
 dependencies {
   add("compileOnly", kotlin("gradle-plugin"))
   add("compileOnly", kotlin("gradle-plugin-api"))
+  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
 }
 
 gradlePlugin {
@@ -19,8 +19,4 @@ gradlePlugin {
       implementationClass = "BuildSupport"
     }
   }
-}
-
-dependencies {
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
 }
